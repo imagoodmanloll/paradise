@@ -3,31 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paradise</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Paradise Generator - Website</title>
+    <link href="asset/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="icon" href="Paradise.png" type="image/x-icon">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        header {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 3rem;
+            gap: 2.5rem;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+        }
+
+        .logo {
+            font-size: 4.5rem;
+            font-weight: bold;
+            margin-bottom: -0.25rem;
+        }
+
+        .subtitle {
+            color: #a8a8a8;
+            font-size: 1.6rem;
+            margin-bottom: 0rem;
+            max-width: 700px;
+            line-height: 1.8;
+        }
+
+        .main-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+            margin: 6rem 0;
+        }
+
+        .main-feature {
+            background: #111;
+            border-radius: 16px;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid #222;
+        }
+
+        .main-feature:hover {
+            transform: translateY(-15px);
+            border-color: #fff;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+        }
+
+        .main-feature h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .main-feature p {
+            color: #a8a8a8;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .discord-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: Transparent;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.4s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 968px) {
+            .main-features {
+                grid-template-columns: 1fr;
+            }
+
+            .logo {
+                font-size: 3.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    
     <header>
+        <a href="https://discord.gg/paradisegen" class="discord-btn">
+            Discord
+        </a>
         <div class="logo">
-            <img src="Paradise.png" alt="ParadiseLogo">
+            Paradise Generator
+        </div>
+        <div class="subtitle">
+            #1 Cracked account provider since July 2024.
         </div>
     </header>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1 id="typing-text">Paradise</h1>
-            <p>the top executor for Roblox with unbeatable performance, and fully web-compatible. ?? UNC</p>
-            <div class="cta-buttons">
-                <a href="404.html" class="cta-button">
-                    <i class="fas fa-download"></i> Install
-                </a>
-            </div>    
+    <main>
+        <div class="main-features">
+            <div class="main-feature">
+                <h3>24/7 Uptime</h3>
+                <p>We use a Virtual Private Server that allows our bot to be online 24/7 to provide the best user experience.</p>
+            </div>
+            <div class="main-feature">
+                <h3>Cheap & Affordable</h3>
+                <p>We have a Free Generator and some paid generators with the cheapest prices you could ever find.</p>
+            </div>
+            <div class="main-feature">
+                <h3>User Safety</h3>
+                <p>We secure your data in our database and it can never be lost as we are using SQLite to store your data without getting it leaked.</p>
+            </div>
+            <div class="main-feature">
+                <h3>Fastest Support</h3>
+                <p>Our support team can reply to your ticket within 30 minutes - 1 hour or less.</p>
+            </div>
         </div>
-    </section>
-
+    </main>
 </body>
 </html>
