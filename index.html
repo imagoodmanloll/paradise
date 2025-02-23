@@ -1,163 +1,491 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paradise Generator - Website</title>
-    <link href="asset/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link rel="icon" href="Paradise.png" type="image/x-icon">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Paradise Generator - Website</title>
+  <link rel="icon" href="Paradise.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0a0a0a;
+      --primary-color: #fff;
+      --secondary-color: #a8a8a8;
+      --card-bg: #111;
+      --border-color: #222;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background-color: var(--bg-color);
+      color: var(--primary-color);
+      overflow-x: hidden;
+    }
+    header {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      padding: 3rem;
+      gap: 1.5rem;
+      background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+      background-size: 400% 400%;
+      animation: gradientAnimation 15s ease infinite;
+    }
+    .logo {
+      font-size: 4.5rem;
+      font-weight: 700;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+    }
+    .subtitle {
+      color: var(--secondary-color);
+      font-size: 1.6rem;
+      max-width: 700px;
+      line-height: 1.8;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+      animation-delay: 0.3s;
+    }
+    .discord-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: transparent;
+      color: var(--primary-color);
+      padding: 0.8rem 1.6rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 1rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeInDown 1s ease forwards;
+      opacity: 0;
+    }
+    .discord-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+    .main-features {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 3rem;
+      padding: 6rem 2rem;
+    }
+    .main-feature {
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      border: 1px solid var(--border-color);
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease forwards;
+      position: relative;
+      overflow: hidden;
+    }
+    .main-feature:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary-color);
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+    }
+    .main-feature h3 {
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+    .main-feature h3::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      height: 3px;
+      width: 0;
+      background: var(--primary-color);
+      transition: width 0.3s ease;
+    }
+    .main-feature:hover h3::after {
+      width: 100%;
+    }
+    .main-feature p {
+      color: var(--secondary-color);
+      line-height: 1.8;
+      font-size: 1.1rem;
+    }
+    .main-feature:nth-child(1) { animation-delay: 0.2s; }
+    .main-feature:nth-child(2) { animation-delay: 0.4s; }
+    .main-feature:nth-child(3) { animation-delay: 0.6s; }
+    .main-feature:nth-child(4) { animation-delay: 0.8s; }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+    }
+    .extra-features {
+      padding: 6rem 2rem;
+      background: #121212;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .feature-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+    .feature-card h3 {
+      margin-bottom: 1rem;
+    }
+    .feature-card p {
+      font-size: 1rem;
+      color: var(--secondary-color);
+    }
+    .feature-card:nth-child(1) { animation-delay: 0.2s; }
+    .feature-card:nth-child(2) { animation-delay: 0.4s; }
+    .feature-card:nth-child(3) { animation-delay: 0.6s; }
+    .about {
+      padding: 6rem 2rem;
+      background: #1a1a1a;
+    }
+    .about p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--secondary-color);
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 0.3s;
+    }
+    .contact {
+      padding: 6rem 2rem;
+      background: #0a0a0a;
+    }
+    .contact form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 0.3s;
+    }
+    .contact input,
+    .contact textarea {
+      width: 100%;
+      padding: 1rem;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+    }
+    .contact button {
+      padding: 1rem;
+      border: none;
+      border-radius: 8px;
+      background: #ff0066;
+      color: var(--primary-color);
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .contact button:hover {
+      background: #ff3388;
+    }
+    footer {
+      padding: 2rem;
+      text-align: center;
+      background: #111;
+      color: var(--secondary-color);
+      opacity: 0;
+      animation: fadeInUp 1s ease forwards;
+      animation-delay: 0.5s;
+    }
+    .why-trust-us {
+      background: #0a0a0a;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .why-trust-us h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+    }
+    .why-trust-us p {
+      color: var(--secondary-color);
+      margin-bottom: 3rem;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+      animation-delay: 0.2s;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .stat-box {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2rem;
+      animation: fadeInUp 0.8s ease forwards;
+      opacity: 0;
+      transform: translateY(30px);
+      text-align: center;
+    }
+    .stat-box:hover {
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+    .stat-box:nth-child(1) { animation-delay: 0.2s; }
+    .stat-box:nth-child(2) { animation-delay: 0.4s; }
+    .stat-box:nth-child(3) { animation-delay: 0.6s; }
+    .stat-box:nth-child(4) { animation-delay: 0.8s; }
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      color: var(--secondary-color);
+      font-size: 1rem;
+    }
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes fadeInDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @keyframes gradientAnimation {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @media (max-width: 968px) {
+      .main-features {
+        grid-template-columns: 1fr;
+      }
+      .logo {
+        font-size: 3.5rem;
+      }
+      .subtitle {
+        font-size: 1.4rem;
+      }
+    }
+    @media (max-width: 768px) {
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        row-gap: 2rem;
+      }
+    }
 
-        body {
-            background-color: #0a0a0a;
-            color: white;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 6rem 2rem;
-        }
-
-        header {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            padding: 3rem;
-            gap: 2.5rem;
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 60px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-            cursor: pointer;
-            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
-        }
-
-        .logo {
-            font-size: 4.5rem;
-            font-weight: bold;
-            margin-bottom: -0.25rem;
-        }
-
-        .subtitle {
-            color: #a8a8a8;
-            font-size: 1.6rem;
-            margin-bottom: 0rem;
-            max-width: 700px;
-            line-height: 1.8;
-        }
-
-        .main-features {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 3rem;
-            margin: 6rem 0;
-        }
-
-        .main-feature {
-            background: #111;
-            border-radius: 16px;
-            padding: 3rem 2rem;
-            text-align: center;
-            transition: all 0.4s ease;
-            border: 1px solid #222;
-        }
-
-        .main-feature:hover {
-            transform: translateY(-15px);
-            border-color: #fff;
-            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
-        }
-
-        .main-feature h3 {
-            font-size: 1.6rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .main-feature p {
-            color: #a8a8a8;
-            line-height: 1.8;
-            font-size: 1.1rem;
-        }
-
-        .discord-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: Transparent;
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.4s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1rem;
-        }
-
-        @media (max-width: 968px) {
-            .main-features {
-                grid-template-columns: 1fr;
-            }
-
-            .logo {
-                font-size: 3.5rem;
-            }
-
-            .subtitle {
-                font-size: 1.4rem;
-            }
-        }
-    </style>
+    .contact-us {
+      background: #0a0a0a;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+    .contact-us .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+    }
+    .contact-us p {
+      color: var(--secondary-color);
+      margin-bottom: 2rem;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+      animation-delay: 0.2s;
+    }
+    .contact-cards {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 2rem;
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+      animation-delay: 0.4s;
+    }
+    .contact-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2rem;
+      width: 250px;
+      text-align: center;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .contact-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    }
+    .contact-card h3 {
+      margin-bottom: 1rem;
+    }
+    .contact-card p {
+      color: var(--secondary-color);
+      margin-bottom: 1.5rem;
+    }
+    .contact-btn {
+      display: inline-block;
+      padding: 0.8rem 1.6rem;
+      border-radius: 8px;
+      background: transparent;
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s ease;
+    }
+    .contact-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <a href="https://discord.gg/paradisegen" class="discord-btn">
-            Discord
-        </a>
-        <div class="logo">
-            Paradise Generator
-        </div>
-        <div class="subtitle">
-            #1 Cracked account provider since July 2024.
-        </div>
-    </header>
+  <header>
+    <a href="https://discord.gg/paradisegen" class="discord-btn">
+      <i class="fab fa-discord"></i> Discord
+    </a>
+    <div class="logo">
+      Paradise Generator
+    </div>
+    <div class="subtitle">
+      Our service ensures instant access to aged, high-quality Roblox, Hotmail alts with zero hassle, guaranteed reliability, and unmatched convenience since 2024.
+    </div>
+  </header>
+  
+  <main>
+    <div class="main-features">
+      <div class="main-feature">
+        <h3>24/7 Uptime</h3>
+        <p>We use a Virtual Private Server that keeps our bot online 24/7 for the best experience.</p>
+      </div>
+      <div class="main-feature">
+        <h3>Cheap & Affordable</h3>
+        <p>Enjoy our Free Generator and low-cost paid options at unbeatable prices.</p>
+      </div>
+      <div class="main-feature">
+        <h3>User Safety</h3>
+        <p>Your data is securely stored using SQLite, ensuring it never gets lost or leaked.</p>
+      </div>
+      <div class="main-feature">
+        <h3>Fastest Support</h3>
+        <p>Our support team responds to your tickets within 30 minutes to 1 hour.</p>
+      </div>
+    </div>
 
-    <main>
-        <div class="main-features">
-            <div class="main-feature">
-                <h3>24/7 Uptime</h3>
-                <p>We use a Virtual Private Server that allows our bot to be online 24/7 to provide the best user experience.</p>
-            </div>
-            <div class="main-feature">
-                <h3>Cheap & Affordable</h3>
-                <p>We have a Free Generator and some paid generators with the cheapest prices you could ever find.</p>
-            </div>
-            <div class="main-feature">
-                <h3>User Safety</h3>
-                <p>We secure your data in our database and it can never be lost as we are using SQLite to store your data without getting it leaked.</p>
-            </div>
-            <div class="main-feature">
-                <h3>Fastest Support</h3>
-                <p>Our support team can reply to your ticket within 30 minutes - 1 hour or less.</p>
-            </div>
+    <section class="why-trust-us">
+      <div class="container">
+        <h2>Why Trust Us?</h2>
+        <p>Join thousands of satisfied customers worldwide who trust Paradise for their needs.</p>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <span class="stat-value">500,000</span>
+            <span class="stat-label">Generated Accounts</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-value" id="discordMembers">0</span>
+            <span class="stat-label">Members</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-value">24/7</span>
+            <span class="stat-label">Reliable Uptime</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-value">4.5 &#9733;</span>
+            <span class="stat-label">Average Rating</span>
+          </div>
         </div>
-    </main>
+      </div>
+    </section>
+
+    <section class="contact-us">
+      <div class="container">
+        <h2 class="section-title">Contact Us</h2>
+        <p>If you're in need of support for a product you purchased or just want to say hi, please contact us by tapping the the buttons.</p>
+        
+        <div class="contact-cards">
+          <div class="contact-card">
+            <h3>DISCORD</h3>
+            <p>Join our Discord community for instant support and updates.</p>
+            <a href="https://discord.gg/freealts" class="contact-btn">JOIN DISCORD</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Paradise Generator. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- members -->
+  <script>
+    fetch("https://discord.com/api/v9/invites/freealts?with_counts=true")
+      .then(response => response.json())
+      .then(data => {
+        if (data && data.approximate_member_count) {
+          document.getElementById("discordMembers").textContent = data.approximate_member_count.toLocaleString();
+        }
+      })
+      .catch(err => {
+        console.error("error", err);
+      });
+  </script>
 </body>
 </html>
