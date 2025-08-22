@@ -1,491 +1,112 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paradise Generator - Website</title>
-  <link rel="icon" href="Paradise.png" type="image/x-icon">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-  <style>
-    :root {
-      --bg-color: #0a0a0a;
-      --primary-color: #fff;
-      --secondary-color: #a8a8a8;
-      --card-bg: #111;
-      --border-color: #222;
-    }
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-    body {
-      background-color: var(--bg-color);
-      color: var(--primary-color);
-      overflow-x: hidden;
-    }
-    header {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      position: relative;
-      padding: 3rem;
-      gap: 1.5rem;
-      background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
-      background-size: 400% 400%;
-      animation: gradientAnimation 15s ease infinite;
-    }
-    .logo {
-      font-size: 4.5rem;
-      font-weight: 700;
-      animation: fadeInUp 1s ease forwards;
-      opacity: 0;
-    }
-    .subtitle {
-      color: var(--secondary-color);
-      font-size: 1.6rem;
-      max-width: 700px;
-      line-height: 1.8;
-      animation: fadeInUp 1s ease forwards;
-      opacity: 0;
-      animation-delay: 0.3s;
-    }
-    .discord-btn {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: transparent;
-      color: var(--primary-color);
-      padding: 0.8rem 1.6rem;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 1rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      animation: fadeInDown 1s ease forwards;
-      opacity: 0;
-    }
-    .discord-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-    }
-    .main-features {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 3rem;
-      padding: 6rem 2rem;
-    }
-    .main-feature {
-      background: var(--card-bg);
-      border-radius: 16px;
-      padding: 2.5rem 2rem;
-      text-align: center;
-      border: 1px solid var(--border-color);
-      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInUp 0.8s ease forwards;
-      position: relative;
-      overflow: hidden;
-    }
-    .main-feature:hover {
-      transform: translateY(-10px);
-      border-color: var(--primary-color);
-      box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
-    }
-    .main-feature h3 {
-      font-size: 1.6rem;
-      margin-bottom: 1.5rem;
-      position: relative;
-      display: inline-block;
-    }
-    .main-feature h3::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -5px;
-      height: 3px;
-      width: 0;
-      background: var(--primary-color);
-      transition: width 0.3s ease;
-    }
-    .main-feature:hover h3::after {
-      width: 100%;
-    }
-    .main-feature p {
-      color: var(--secondary-color);
-      line-height: 1.8;
-      font-size: 1.1rem;
-    }
-    .main-feature:nth-child(1) { animation-delay: 0.2s; }
-    .main-feature:nth-child(2) { animation-delay: 0.4s; }
-    .main-feature:nth-child(3) { animation-delay: 0.6s; }
-    .main-feature:nth-child(4) { animation-delay: 0.8s; }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-    .section-title {
-      font-size: 2.5rem;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 2rem;
-      opacity: 0;
-      animation: fadeInUp 1s ease forwards;
-    }
-    .extra-features {
-      padding: 6rem 2rem;
-      background: #121212;
-    }
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
-    }
-    .feature-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 2rem;
-      text-align: center;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInUp 0.8s ease forwards;
-    }
-    .feature-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-    }
-    .feature-card h3 {
-      margin-bottom: 1rem;
-    }
-    .feature-card p {
-      font-size: 1rem;
-      color: var(--secondary-color);
-    }
-    .feature-card:nth-child(1) { animation-delay: 0.2s; }
-    .feature-card:nth-child(2) { animation-delay: 0.4s; }
-    .feature-card:nth-child(3) { animation-delay: 0.6s; }
-    .about {
-      padding: 6rem 2rem;
-      background: #1a1a1a;
-    }
-    .about p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      color: var(--secondary-color);
-      opacity: 0;
-      animation: fadeInUp 1s ease forwards;
-      animation-delay: 0.3s;
-    }
-    .contact {
-      padding: 6rem 2rem;
-      background: #0a0a0a;
-    }
-    .contact form {
-      max-width: 600px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-      opacity: 0;
-      animation: fadeInUp 1s ease forwards;
-      animation-delay: 0.3s;
-    }
-    .contact input,
-    .contact textarea {
-      width: 100%;
-      padding: 1rem;
-      border-radius: 8px;
-      border: none;
-      font-size: 1rem;
-    }
-    .contact button {
-      padding: 1rem;
-      border: none;
-      border-radius: 8px;
-      background: #ff0066;
-      color: var(--primary-color);
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: background 0.3s ease;
-    }
-    .contact button:hover {
-      background: #ff3388;
-    }
-    footer {
-      padding: 2rem;
-      text-align: center;
-      background: #111;
-      color: var(--secondary-color);
-      opacity: 0;
-      animation: fadeInUp 1s ease forwards;
-      animation-delay: 0.5s;
-    }
-    .why-trust-us {
-      background: #0a0a0a;
-      padding: 4rem 2rem;
-      text-align: center;
-    }
-    .why-trust-us h2 {
-      font-size: 2.2rem;
-      margin-bottom: 1rem;
-      animation: fadeInUp 1s ease forwards;
-      opacity: 0;
-    }
-    .why-trust-us p {
-      color: var(--secondary-color);
-      margin-bottom: 3rem;
-      animation: fadeInUp 1s ease forwards;
-      opacity: 0;
-      animation-delay: 0.2s;
-    }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .stat-box {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 2rem;
-      animation: fadeInUp 0.8s ease forwards;
-      opacity: 0;
-      transform: translateY(30px);
-      text-align: center;
-    }
-    .stat-box:hover {
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-    }
-    .stat-box:nth-child(1) { animation-delay: 0.2s; }
-    .stat-box:nth-child(2) { animation-delay: 0.4s; }
-    .stat-box:nth-child(3) { animation-delay: 0.6s; }
-    .stat-box:nth-child(4) { animation-delay: 0.8s; }
-    .stat-value {
-      font-size: 2rem;
-      font-weight: 700;
-      display: block;
-      margin-bottom: 0.5rem;
-    }
-    .stat-label {
-      color: var(--secondary-color);
-      font-size: 1rem;
-    }
-    @keyframes fadeInUp {
-      0% {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    @keyframes fadeInDown {
-      0% {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    @keyframes gradientAnimation {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    @media (max-width: 968px) {
-      .main-features {
-        grid-template-columns: 1fr;
-      }
-      .logo {
-        font-size: 3.5rem;
-      }
-      .subtitle {
-        font-size: 1.4rem;
-      }
-    }
-    @media (max-width: 768px) {
-      .features-grid {
-        grid-template-columns: 1fr;
-      }
-      .stats-grid {
-        grid-template-columns: 1fr 1fr;
-        row-gap: 2rem;
-      }
-    }
-
-    .contact-us {
-      background: #0a0a0a;
-      padding: 4rem 2rem;
-      text-align: center;
-    }
-    .contact-us .section-title {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      animation: fadeInUp 1s ease forwards;
-      opacity: 0;
-    }
-    .contact-us p {
-      color: var(--secondary-color);
-      margin-bottom: 2rem;
-      animation: fadeInUp 1s ease forwards;
-      opacity: 0;
-      animation-delay: 0.2s;
-    }
-    .contact-cards {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      gap: 2rem;
-      animation: fadeInUp 1s ease forwards;
-      opacity: 0;
-      animation-delay: 0.4s;
-    }
-    .contact-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 16px;
-      padding: 2rem;
-      width: 250px;
-      text-align: center;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
-    .contact-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-    }
-    .contact-card h3 {
-      margin-bottom: 1rem;
-    }
-    .contact-card p {
-      color: var(--secondary-color);
-      margin-bottom: 1.5rem;
-    }
-    .contact-btn {
-      display: inline-block;
-      padding: 0.8rem 1.6rem;
-      border-radius: 8px;
-      background: transparent;
-      color: var(--primary-color);
-      text-decoration: none;
-      font-weight: 600;
-      transition: background 0.3s ease;
-    }
-    .contact-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>imagoodmanloll</title>
+  <link rel="icon" type="image/gif" href="https://images-ext-1.discordapp.net/external/nA8FHiZitaCj0P3y7B0rMoSIqn_1lgO0TmcgKtHqzTs/%3Fsize%3D128/https/cdn.discordapp.com/avatars/1392164463591030914/a_ee86c467e76ec87c4732dc2417a5689a.gif">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="wrap">
   <header>
-    <a href="https://discord.gg/paradisegen" class="discord-btn">
-      <i class="fab fa-discord"></i> Discord
-    </a>
-    <div class="logo">
-      Paradise Generator
-    </div>
-    <div class="subtitle">
-      Our service ensures instant access to aged, high-quality Roblox, Hotmail alts with zero hassle, guaranteed reliability, and unmatched convenience since 2024.
+    <div class="brand">
+      <div class="avatar">
+        <img src="https://images-ext-1.discordapp.net/external/nA8FHiZitaCj0P3y7B0rMoSIqn_1lgO0TmcgKtHqzTs/%3Fsize%3D128/https/cdn.discordapp.com/avatars/1392164463591030914/a_ee86c467e76ec87c4732dc2417a5689a.gif" alt="Avatar">
+      </div>
+      <div>
+        <h1>imagoodmanloll / goodman</h1>
+        <p>full stack discord bot dev</p>
+      </div>
     </div>
   </header>
-  
-  <main>
-    <div class="main-features">
-      <div class="main-feature">
-        <h3>24/7 Uptime</h3>
-        <p>We use a Virtual Private Server that keeps our bot online 24/7 for the best experience.</p>
-      </div>
-      <div class="main-feature">
-        <h3>Cheap & Affordable</h3>
-        <p>Enjoy our Free Generator and low-cost paid options at unbeatable prices.</p>
-      </div>
-      <div class="main-feature">
-        <h3>User Safety</h3>
-        <p>Your data is securely stored using SQLite, ensuring it never gets lost or leaked.</p>
-      </div>
-      <div class="main-feature">
-        <h3>Fastest Support</h3>
-        <p>Our support team responds to your tickets within 30 minutes to 1 hour.</p>
-      </div>
+
+  <main class="grid">
+    <div>
+      <section class="card about">
+        <div class="hero">
+          <div>
+            <h2 class="title">Hello, I'm goodman</h2>
+            <p class="subtitle">I make Discord bots for fun, Python is my favorite language.</p>
+          </div>
+        </div>
+
+        <p class="bio">Active on Discord. My main stacks: <strong>discord.py / pycord</strong>, <strong>discord.js</strong>, <strong>flask</strong>.</p>
+
+        <div class="stat-list">
+          <div class="stat"><h3 id="botCount">16</h3><p>total projects</p></div>
+          <div class="stat"><h3 id="servers">4y</h3><p>experience</p></div>
+          <div class="stat"><h3 id="uptime"><1.5d</h3><p>avg build time</p></div>
+        </div>
+      </section>
+
+      <section class="card tech-stack">
+        <h3>Tech stack</h3>
+        <div class="tags">
+          <div class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="20"/> Python</div>
+          <div class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="20"/> Node.js</div>
+          <div class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original.svg" width="20"/> Golang</div>
+        </div>
+      </section>
     </div>
 
-    <section class="why-trust-us">
-      <div class="container">
-        <h2>Why Trust Us?</h2>
-        <p>Join thousands of satisfied customers worldwide who trust Paradise for their needs.</p>
-        <div class="stats-grid">
-          <div class="stat-box">
-            <span class="stat-value">500,000</span>
-            <span class="stat-label">Generated Accounts</span>
+    <div>
+      <section id="projects" class="card projects-section">
+        <h3>Known Projects</h3>
+        <div class="projects">
+          <div class="project" onclick="openProject('Paradise Generator | 3.2k members','Account generator service since 2024, still active in 2025.')">
+            <div class="project-header">
+              <h4>Paradise Generator</h4>
+              <small class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="16"/> Python</small>
+            </div>
+            <p class="project-desc">Account generator service, mainly focused on Roblox Accounts.</p>
           </div>
-          <div class="stat-box">
-            <span class="stat-value" id="discordMembers">0</span>
-            <span class="stat-label">Members</span>
+
+          <div class="project" onclick="openProject('Dread Generator | 1.8k members','A service let you generate compromised accounts.')">
+            <div class="project-header">
+              <h4>Dread Generator</h4>
+              <small class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="16"/> Python</small>
+            </div>
+            <p class="project-desc">Multiplite account generation services since 2025, no longer active.</p>
           </div>
-          <div class="stat-box">
-            <span class="stat-value">24/7</span>
-            <span class="stat-label">Reliable Uptime</span>
-          </div>
-          <div class="stat-box">
-            <span class="stat-value">4.5 &#9733;</span>
-            <span class="stat-label">Average Rating</span>
+
+          <div class="project" onclick="openProject('Steak Exchange | 6.7k members','Crypto exchanging service that let you exchange from flats > cryptocurrencies, etc...')">
+            <div class="project-header">
+              <h4>Steak Exchange</h4>
+              <small class="tag"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="16"/> Python</small>
+            </div>
+            <p class="project-desc">A service let you exchange your funds quickly.</p>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="contact-us">
-      <div class="container">
-        <h2 class="section-title">Contact Us</h2>
-        <p>If you're in need of support for a product you purchased or just want to say hi, please contact us by tapping the the buttons.</p>
-        
-        <div class="contact-cards">
-          <div class="contact-card">
-            <h3>DISCORD</h3>
-            <p>Join our Discord community for instant support and updates.</p>
-            <a href="https://discord.gg/freealts" class="contact-btn">JOIN DISCORD</a>
-          </div>
+      <section id="contact" class="card contact-section">
+        <h3>Contact & links</h3>
+        <p>Drop a message or ping me on Discord.</p>
+        <div class="copy-container">
+          <div class="copy">discord: <span id="discordTag">imagoodmanlolol</span></div>
+          <button class="btn" id="copyBtn">Copy tag</button>
         </div>
-      </div>
-    </section>
+        <div class="btn-group">
+          <a class="btn" href="https://github.com/imagoodmanloll" target="_blank">GitHub</a>
+        </div>
+      </section>
 
+      <footer>built by goodman - keep it simple</footer>
+    </div>
   </main>
+</div>
 
-  <footer>
-    <div class="container">
-      <p>&copy; 2025 Paradise Generator. All rights reserved.</p>
+<div class="modal" id="modal">
+  <div class="panel">
+    <h3 id="modalTitle">Project</h3>
+    <p id="modalBody"></p>
+    <div class="modal-actions">
+      <button class="btn" onclick="closeModal()">Close</button>
     </div>
-  </footer>
+  </div>
+</div>
 
-  <!-- members -->
-  <script>
-    fetch("https://discord.com/api/v9/invites/freealts?with_counts=true")
-      .then(response => response.json())
-      .then(data => {
-        if (data && data.approximate_member_count) {
-          document.getElementById("discordMembers").textContent = data.approximate_member_count.toLocaleString();
-        }
-      })
-      .catch(err => {
-        console.error("error", err);
-      });
-  </script>
+<script src="script.js"></script>
 </body>
 </html>
